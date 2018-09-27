@@ -5,14 +5,14 @@ main(List<String> arguments) {
   //systemFileTmp();
   //listInfoCurrentDirectory();
   File file = createFile('tmp.txt');
-//  writeFile(file);
-//  readFile(file);
-
+  writeFile(file);
+  readFile(file);
+  deleteFile(file);
 }
 
 File createFile(String fileName) {
   Directory directory = Directory.current;
-  File file = File('${directory.path + fileName}');
+  File file = File('${directory.path + '/' + fileName}');
   return file;
 }
 
@@ -39,6 +39,14 @@ void writeFile(File file) {
   randomAccessFile.writeStringSync('Hello World \r\n How are you today');
   randomAccessFile.flushSync();
   randomAccessFile.close();
+}
+
+void deleteFile(File file){
+  if(file.existsSync()){
+    file.deleteSync();
+  } else {
+    print('File not found');
+  }
 }
 
 void listInfoCurrentDirectory() {
