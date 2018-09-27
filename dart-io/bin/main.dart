@@ -2,7 +2,26 @@ import 'dart:io';
 
 main(List<String> arguments) {
   //syncSample();
-  systemFileTmp();
+  //systemFileTmp();
+  listInfoCurrentDirectory();
+}
+
+void listInfoCurrentDirectory() {
+  Directory directory = Directory.current;
+  print('Current Path: ${directory.path}');
+
+  List<FileSystemEntity> list = directory.listSync(recursive: true);
+  print('Entries in list: ${list.length}');
+
+  list.forEach((item){
+    FileStat fileStat = item.statSync();
+    print('Path: ${item.path}');
+    print('Type: ${fileStat.type}');
+    print('Size: ${fileStat.size}');
+    print('');
+  });
+
+
 }
 
 void systemFileTmp() {
