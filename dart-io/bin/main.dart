@@ -3,7 +3,42 @@ import 'dart:io';
 main(List<String> arguments) {
   //syncSample();
   //systemFileTmp();
-  listInfoCurrentDirectory();
+  //listInfoCurrentDirectory();
+  File file = createFile('tmp.txt');
+//  writeFile(file);
+//  readFile(file);
+
+}
+
+File createFile(String fileName) {
+  Directory directory = Directory.current;
+  File file = File('${directory.path + fileName}');
+  return file;
+}
+
+void readFile(File file) {
+  if(file.existsSync()){
+    print('Reading String ......');
+    print(file.readAsStringSync());
+
+    print('Reading Bytes ......');
+    List<int> values = file.readAsBytesSync();
+    values.forEach((value){
+      print(values);
+    });
+
+
+
+  } else {
+    print('File Not Found');
+  }
+}
+
+void writeFile(File file) {
+  RandomAccessFile randomAccessFile = file.openSync(mode: FileMode.append);
+  randomAccessFile.writeStringSync('Hello World \r\n How are you today');
+  randomAccessFile.flushSync();
+  randomAccessFile.close();
 }
 
 void listInfoCurrentDirectory() {
